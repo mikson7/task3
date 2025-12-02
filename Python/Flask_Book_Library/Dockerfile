@@ -8,8 +8,12 @@ WORKDIR /app
 COPY . .
 ENV FLASK_ENV=development
 ENV PASSWORD=1qaz@WSX
+ENV PYTHONPATH=/app
 # Instalujemy zależności
 RUN pip install --no-cache-dir -r requirements.txt
+
+RUN pip install --no-cache-dir pytest
+RUN pytest --maxfail=1 --disable-warnings -q
 
 # Ustawiamy zmienną środowiskową, aby Flask wiedział, jak uruchomić aplikację
 ENV FLASK_APP=app.py
